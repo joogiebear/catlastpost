@@ -77,7 +77,7 @@ function catlastpost_install() {
 	cache_stylesheet($stylesheet['tid'], $stylesheet['cachefile'], $lastpostav_css);
 	update_theme_stylesheet_list(1, false, true);
 
-	// ✅ Add setting group and toggle setting
+	// Add setting group and toggle setting
 	$setting_group = array(
 		"name" => "catlastpost",
 		"title" => "Category Last Post Settings",
@@ -275,7 +275,7 @@ function catlastpost_hookin__build_forumbits_forum(&$args) {
 	$threadSubject = htmlspecialchars_uni($threadSubject);
 	$threadFullSubject = htmlspecialchars_uni($threadFullSubject);
 
-	// ✅ Use the toggle setting to decide whether to display
+	// Use the toggle setting to decide whether to display
 	if (THIS_SCRIPT != 'forumdisplay.php' || $mybb->settings['catlastpost_show_on_forumdisplay']) {
 		$catLastPost = eval($templates->render('forumbit_depth1_cat_lastpost'));
 	} else {

@@ -104,25 +104,25 @@ function catlastpost_install() {
 function catlastpost_uninstall() {
 	global $mybb, $cache, $db;
 
-	// 🧹 Remove the plugin's custom template
+	// Remove the plugin's custom template
 	$db->delete_query('templates', "title = 'forumbit_depth1_cat_lastpost'");
 
-	// 🧹 Remove the plugin's custom stylesheet
+	// Remove the plugin's custom stylesheet
 	$db->delete_query('themestylesheets', "name='lastpostav.css'");
 
-	// 🧹 Remove plugin setting and setting group
+	// Remove plugin setting and setting group
 	$db->delete_query('settings', "name='catlastpost_show_on_forumdisplay'");
 	$db->delete_query('settinggroups', "name='catlastpost'");
 
-	// 🧠 Refresh the settings cache
+	// Refresh the settings cache
 	rebuild_settings();
 
-	// 🧹 Remove only the {$GLOBALS['catLastPost']} injection from templates
+	// Remove only the {$GLOBALS['catLastPost']} injection from templates
 	require_once MYBB_ROOT.'/inc/adminfunctions_templates.php';
 	find_replace_templatesets('forumbit_depth1_cat', '#\{\$GLOBALS\[\'catLastPost\'\]\}#', '', 0);
 	find_replace_templatesets('forumdisplay_subforums', '#\{\$GLOBALS\[\'catLastPost\'\]\}#', '', 0);
 
-	// 🔄 Rebuild stylesheet list
+	// Rebuild stylesheet list
 	require_once MYBB_ADMIN_DIR.'inc/functions_themes.php';
 	$query = $db->simple_select('themes', 'tid');
 	while ($theme = $db->fetch_array($query)) {
